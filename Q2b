@@ -1,0 +1,50 @@
+clear variables;
+
+N = 1e7;
+%N servers, and N service requests arrive sequentially
+servers = zeros(N,1); 
+total = 0;
+for n = 1:N
+    r1 = randi([1,N],1,1);
+    r2 = randi([1,N],1,1);
+    if servers(r1) == servers(r2)
+        % break tie
+        servers(r1) = servers(r1) + 1;
+    end
+    if servers(r1) > servers(r2)
+        servers(r2) = servers(r2) + 1;
+    end
+    if servers(r1) < servers(r2)
+        servers(r1) = servers(r1) + 1;
+    end
+end
+% max is the maxmium load we have
+max = max(servers);
+load = zeros(max,1);
+for i = 1:N
+    for j = 1:max
+        if servers(i) == j
+            load(j) = load(j) + 1;
+        end
+    end
+end
+for q = 1:max
+    % total request except load = 0
+    total = load(q) + total;
+end
+load0 = N - total;
+load = [load0; load];
+% load range from 0 to the maxmimu nuber of requests routed to that server
+load = load.';
+count = zeros(1,max+1);
+for a = 1: (max+1)
+    count(a) = a - 1;
+end
+b = bar(count , load);
+for i1=1:numel(load)
+    text(count(i1),load(i1),num2str(load(i1)),...
+               'HorizontalAlignment','center',...
+               'VerticalAlignment','bottom')
+end
+xlabel('how many servers have load 0, load 1, so on')
+ylabel('number of request routed to that server')
