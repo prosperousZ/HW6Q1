@@ -1,46 +1,45 @@
+package CS6150;
 //Java ArrayList of Arrays
-import java.io.*;
+
 import java.util.*;
 import java.util.Random;
 
-//Haoze Zhang
 
-public class MyClass
+public class understandingRelaxAndRound
 {
-   
-  public static void main (String args[])
-  {
+	
 
-   int n = 500; /*  n people, which is n sets */
-   ArrayList<Integer> m  = new ArrayList<Integer>(500); /*  m skills that wish to cover */
-   
-   // range of m is from 1 to 500, include 500, which is totally 500 skills
-   for( int a = 0; a < 500; a ++){
-       m.add(a+1);
-   }
-   
-   int d = 25; /*  d be the size of each skill set */
-   
-   ArrayList<Integer> copyM = new ArrayList<Integer>();
-   
-   ArrayList<int []> list = new ArrayList<int[]>(n);
-   
-   int []person = new int[d];
-   
-   for(int i = 0; i < 500; i++) {
-       
-       copyM.addAll(m);
-       for (int j = 0; j < d; j ++) {
-         int rnd = new Random().nextInt(copyM.size());
-         person[j] = copyM.get(rnd);
-         //avoid duplicate skills in one person, remove used index
-         copyM.remove(rnd);
-       }
-       list .add(person);
-       copyM.removeAll(copyM);
-   
-   }
-   // index is from 0 to 499, which is totally 500 person
-   System.out.println(Arrays.toString(list.get(499)));
-  }
+	public static void main (String args[])
+	  {
+
+	   int n = 500; /*  n people, which is n sets */
+	   ArrayList<Integer> m  = new ArrayList<Integer>(500); /*  m skills that wish to cover */
+	   
+	   // range of m is from 1 to 500, include 500, which is totally 500 skills
+	   for( int a = 0; a < 500; a ++){
+	       m.add(a+1);
+	   }
+	   
+	   int d = 25; /*  d be the size of each skill set */
+	   
+	   ArrayList<Integer> copyM = new ArrayList<Integer>();
+	   
+	   int []person = new int[d];
+	   
+	   for(int i = 0; i < n; i++) {
+	       
+	       copyM.addAll(m);
+	       for (int j = 0; j < d; j ++) {
+	         int rnd = new Random().nextInt(copyM.size());
+	         person[j] = copyM.get(rnd);
+	         //avoid duplicate skills in one person, remove used index
+	         copyM.remove(rnd);
+	       }
+	       System.out.println(Arrays.toString(person));
+	       
+	       copyM.removeAll(copyM);
+	   
+	   }
+	  }
+	
 }
