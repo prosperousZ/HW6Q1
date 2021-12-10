@@ -13,7 +13,7 @@ public class CS6150 {
     }
     
     public void findSets(int [] arrA, int sum){
-    System.out.println("Given Input: " + Arrays.toString(input) + ", and K = " + k);
+    System.out.println("Given Array: " + Arrays.toString(arrA) + ", required sum: " + sum);
         Arrays.sort(arrA);
         List<Integer> combinationList = new ArrayList<>();
         combinationUtil(arrA, sum, 0, 0, combinationList);
